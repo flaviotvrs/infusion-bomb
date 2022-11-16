@@ -23,7 +23,8 @@ AccelStepper stepper(1, 24, 22); /* EN=1, CLK=24, CW=22 */
 
 boolean loadFinish = false;
 
-void setup()
+// Inicializa e define os valores iniciais
+void setup() 
 {
    Serial.begin(9600);
 
@@ -40,6 +41,7 @@ void setup()
    delay(2000);
 }
 
+// Executa loops chaando as funções consecutivamente
 void loop()
 {
    readySign();
@@ -63,6 +65,7 @@ void loop()
    }
 }
 
+// Função que lê e recebe o volume em mL
 float readQuantityMl()
 {
 
@@ -96,6 +99,7 @@ float readQuantityMl()
    return volume;
 }
 
+// Função que lê e recebe a vazão em mL/s
 long readVazaoMlS()
 {
 
@@ -129,6 +133,7 @@ long readVazaoMlS()
    return vazao;
 }
 
+// Função responsável por encher a seringa
 void loading(float quantityMl)
 {
    long calculatedQuantity = quantityMl * MAX_POSITION / MAX_ML;
@@ -142,6 +147,7 @@ void loading(float quantityMl)
    Serial.println(stepper.currentPosition());
 }
 
+// Função responsável por comprimir a seringa
 void infusion(float mlS)
 {
    Serial.print("Infusion Started! Current position: ");
@@ -158,6 +164,7 @@ void infusion(float mlS)
    Serial.println(stepper.currentPosition());
 }
 
+// Função para acender o LED verde
 void readySign()
 {
    digitalWrite(READY_LED_PIN, HIGH);
@@ -165,6 +172,7 @@ void readySign()
    digitalWrite(INFUSION_LED_PIN, LOW);
 }
 
+// Função para acender o LED amarelo
 void loadingSign(boolean start)
 {
    digitalWrite(READY_LED_PIN, LOW);
@@ -179,6 +187,7 @@ void loadingSign(boolean start)
    }
 }
 
+// Função para acender o LED azul
 void infusionSign(boolean start)
 {
    digitalWrite(READY_LED_PIN, LOW);
@@ -193,6 +202,7 @@ void infusionSign(boolean start)
    }
 }
 
+// Função para texto do display
 void lcdPrint(String line1, String line2)
 {
    lcd.clear();
